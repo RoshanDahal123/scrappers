@@ -10,10 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget gnupg ca-certificates
+          wget -qO - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
       - name: Install packages
         run: npm install
       - name: Run updater
-        run: node ./src/DailynewsScrapper.js --no-sandbox && node ./src/dailyDataScrapper.js --no-sandbox
+        run: node ./src/DailynewsScrapper.js --no-sandbox --disable-setuid-sandbox && node ./src/dailyDataScrapper.js --no-sandbox --disable-setuid-sandbox
       - name: Setup Git
         run: git config --local user.email "dahalroshan765@gmail.com" && git config --local user.name "Roshan Dahal"
       - name: Commit Files
