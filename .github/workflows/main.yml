@@ -17,7 +17,7 @@ jobs:
       - name: Run updater
         run: node ./src/DailynewsScrapper.js && node ./src/dailyDataScrapper.js
       - name: Setup Git
-        run: git config --local user.email "pawanawasthi481@gmail.com" && git config --local user.name "Pawan Awasthi"
+        run: git config --local user.email "dahalroshan765@gmail.com" && git config --local user.name "Roshan Dahal"
       - name: Commit Files
         run: git add . && git commit -m "Update data"
       - name: Push changes
