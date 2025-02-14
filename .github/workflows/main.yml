@@ -1,3 +1,4 @@
+
 name: update-companies-data
 on:
   schedule:
@@ -10,12 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          node-version: "22"
       - name: Install packages
         run: npm install
       - name: Run updater
-        run: node ./src/DailynewsScrapper.js && node ./src/dailyDataScrapper.js
+        run: node ./src/DailynewsScrapper.js --no-sandbox && node ./src/dailyDataScrapper.js --no-sandbox
       - name: Setup Git
         run: git config --local user.email "dahalroshan765@gmail.com" && git config --local user.name "Roshan Dahal"
       - name: Commit Files
